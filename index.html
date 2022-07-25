@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>قـــــــراء</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Uncial+Antiqua&family=Tajawal&family=Qahiri&family=Sirin+Stencil&family=Caesar+Dressing&family=Saira+Stencil+One&family=Akronim&family=Eater&family=Antonio:wght@100;400&family=Caesar+Dressing&family=Covered+By+Your+Grace&family=Creepster&family=Limelight&family=Righteous&family=Finger+Paint&family=Gugi&family=Jua&family=Kavivanar&family=Merienda+One&family=Michroma&family=Niconne&family=Nosifer&family=Nova+Script&family=Plaster&family=Racing+Sans+One&family=Stick+No+Bills:wght@200&family=Wallpoet&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/f0612c2657.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://kit.fontawesome.com/c8e4d183c2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <nav>
+      <ul class="menu">
+        <li>
+          <a href="#"><b>تسجيل الدخول</b></a>
+        </li>
+        <li>
+          <a href="#"><b>اشتراك</b></a>
+        </li>
+        <li>
+          <a href="#"><b>الأقسام</b></a>
+        </li>
+        <li>
+          <a href="#"><b>الكتب</b></a>
+        </li>
+        <li>
+          <a href="#"><b>الرئيسية</b></a>
+        </li>
+      </ul>
+      <form method="post" class="search-box">
+        <div>
+          <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+
+          <input
+            class="search-txt"
+            type="search"
+            name=""
+            placeholder="اسم الكتاب او المؤلف..."
+          />
+        </div>
+      </form>
+      <a href="#" class="logo">
+        <div class="logo-txt">
+          <h1 style="color: #0e7477; margin: 0 10px">قُـــــرّاء</h1>
+          <!--<h2 style="color: white; float: left;">BOOK</h2>
+                <h4 style="color: #072670fb; float: left; margin-top: 28px; margin-left: 10px; margin-right: 5px; letter-spacing: -1px; font-family:sans-serif;"> >> Movie </h4>
+                <h5 style="color: white; float: left; margin-top: 28px; margin-left: 10px; margin-right: 5px; letter-spacing: -1px; font-family:sans-serif;"> >> Films </h4>
+            -->
+        </div>
+        <div class="logo-icon"><i class="fas fa-book"></i></div>
+      </a>
+    </nav>
+
+    <div class="container">
+      <div class="forehead">
+        <div class="title">قُــــــرّاء</div>
+        <div class="main-search-box">
+          <a href="#" class="main-search-btn"><i class="fas fa-search"></i></a>
+          <input
+            class="main-search-txt"
+            type="search"
+            name=""
+            placeholder="اسم الكتاب او المؤلف..."
+          />
+        </div>
+      </div>
+
+      <!-- <div class="rate">
+            <i class="fas fa-star fas-2x" data-index="0"></i>
+            <i class="fas fa-star fas-2x" data-index="1"></i>
+            <i class="fas fa-star fas-2x" data-index="2"></i>
+            <i class="fas fa-star fas-2x" data-index="3"></i>
+            <i class="fas fa-star fas-2x" data-index="4"></i>
+        </div> -->
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/js/all.min.js"
+      integrity="sha512-cyAbuGborsD25bhT/uz++wPqrh5cqPh1ULJz4NSpN9ktWcA6Hnh9g+CWKeNx2R0fgQt+ybRXdabSBgYXkQTTmA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var ratedIndex = -1,
+        uID = 0,
+        pID = 0;
+
+      $(document).ready(function () {
+        resetStarColors();
+
+        if (localStorage.getItem(ratedIndex) != null) {
+          setStars(parseInt(localStorage.getItem("ratedIndex")));
+        }
+        $(".fa-star").on("click", function () {
+          ratedIndex = parseInt($(this).data("index"));
+          localStorage.setItem("ratedIndex", ratedIndex);
+          saveToTheDB();
+        });
+
+        $(".fa-star").mouseover(function () {
+          resetStarColors();
+          var currentIndex = parseInt($(this).data("index"));
+          setStars(currentIndex);
+        });
+
+        $(".fa-star").mouseleave(function () {
+          resetStarColors();
+
+          if (ratedIndex != -1) setStars(ratedIndex);
+        });
+      });
+      function saveToTheDB() {
+        $.ajax({
+          url: "product.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            save: 1,
+            uID: uID,
+            pID: pID,
+            ratedIndex: ratedIndex,
+          },
+          success: function (r) {
+            uID = r.uid;
+            pID = r.pID;
+          },
+        });
+      }
+
+      function setStars(max) {
+        for (var i = 0; i <= max; i++)
+          $(".fa-star:eq(" + i + ")").css("color", "orange");
+      }
+
+      function resetStarColors() {
+        $(".fa-star").css("color", "white");
+      }
+    </script>
+  </body>
+</html>
